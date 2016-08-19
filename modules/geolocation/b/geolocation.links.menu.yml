@@ -1,0 +1,12 @@
+# Define default links for this module.
+geolocation.admin_config_geolocation:
+  route_name: geolocation.admin_config_geolocation
+  title: 'Geolocation settings'
+  parent: system.admin_config‚
+  description: 'Configure geolocation settings.'
+
+geolocation.google_map_api_key:
+  route_name: geolocation.google_map_api_key
+  title: 'Geolocaction - Google Map API key'
+  parent: geolocation.admin_config_geolocation
+  description: 'A simple form to add a Google Map API key'

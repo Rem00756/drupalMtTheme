@@ -1,0 +1,15 @@
+geolocation.admin_config_geolocation:
+  path: '/admin/config/geolocation'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Geolocation settings'
+  requirements:
+    _permission: 'configure geolocation'
+
+geolocation.google_map_api_key:
+  path: '/admin/config/geolocation/google-map-api'
+  defaults:
+    _form:  '\Drupal\geolocation\Form\GeolocationGoogleMapAPIkey'
+    _title: 'Geolocaction - Google Maps API key'
+  requirements:
+    _permission: 'configure geolocation:'

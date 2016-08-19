@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Contains update for the geolocation module.
+ */
+
+/**
+ * @param $sandbox
+ *
+ * Implements hook_update_N().
+ * Set a empty default value for geolocation.google_map_api_key.
+ */
+function geolocation_update_8001($sandbox) {
+  $config = Drupal::configFactory()->getEditable('geolocation.settings');
+  $config->set('geolocation.google_map_api_key', '');
+  $config->save();
+}
