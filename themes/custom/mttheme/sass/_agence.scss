@@ -1,6 +1,7 @@
 .nom_agence{
     display: inline;
-    h3{
+    h3{        
+        font-family: 'Fjalla One', sans-serif;
         font-size: 600%;
         font-weight: bold;
     }
@@ -9,7 +10,9 @@
 #agence{
     text-align: center;
     margin-bottom: 200px;
+    
     h4{
         font-size: 200%;
+        font-family: 'Fjalla One', sans-serif;
     }
 }

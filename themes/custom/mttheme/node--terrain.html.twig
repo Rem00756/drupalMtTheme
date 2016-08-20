@@ -1,25 +1,37 @@
 <!-- content.fiel_afficha[].getValue()|first.value --> 
-
-{% if content.field_afficha == true %}
-    <div class="photo_terrain">
-        {{content.field_photo_terrain}}
+<div class="large-12">
+    <div class="terrain titre large-12">
+        <h3>{{content.field_titre_annonce}}</h3>
     </div>
-{% endif %}
-<div class="prix">
-    {{content.field_prix}}
-</div>
-<div class="description">
-    {{content.field_description}}
-</div>
-<br />
-<div class="agence">
-    {{content.field_agence}}
-</div>
-<br />
-<div class="datedesortie">
-    {{content.field_date_de_s}}
-</div>
-<br />
-<div class="maps">
-    {{content.field_geolocalisation}}
+    <div class="terrain maps">
+        {{content.field_geolocalisation}}
+    </div>
+    {% if content.field_afficha == true %}
+        <div class="terrain photo_terrain col-lg-offset-4 col-lg-4">
+            {{content.field_photo_terrain}}
+        </div>
+    {% endif %}
+    <div class="row info-terrain">
+            
+            <div class="row">
+                <div class="terrain description large-6 columns">
+                    <h4>Description</h4>
+                    {{content.field_description}}
+                </div>
+                <div class="terrain prix large-6 columns">
+                    <h4>Prix</h4>
+                    {{content.field_prix}}
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                <div id="info_agence_terrain" class="terrain agence small-6 large-centered columns">
+                    <h4>Agence Immobilière</h4>
+                    {{content.field_agence}}
+                </div>
+            </div>
+                
+
+    </div>
 </div>

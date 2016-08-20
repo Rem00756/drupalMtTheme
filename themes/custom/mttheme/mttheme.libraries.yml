@@ -9,3 +9,7 @@ global-js:
     depenencies: 
         - core/jquery
         
+fonts:
+    css:
+        theme:
+            '//fonts.googleapis.com/css?family=Fjalla+One': {type: external}
