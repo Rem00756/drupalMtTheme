@@ -97,7 +97,7 @@
           position: google.maps.ControlPosition.LEFT_TOP
         },
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        zoom: 2,
+        zoom: 5,
         style: []
       }
     };
