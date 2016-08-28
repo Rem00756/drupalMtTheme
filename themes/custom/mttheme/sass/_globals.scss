@@ -27,7 +27,8 @@ body{
 }
 
 .container{
-    @include container(1100px);
+    @include container(1300px);
+    
 }
 
 
@@ -60,7 +61,8 @@ body{
 .clr{clear:both;}
 
 
-
-
+.fullWidth{
+    width: 100%;
+}
 
 

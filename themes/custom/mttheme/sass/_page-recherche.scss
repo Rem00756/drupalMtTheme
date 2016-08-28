@@ -1,0 +1,15 @@
+.list-recherche{
+    background: url('../images/bg-text.png');
+    margin-bottom: 10px;
+    padding: 10px;
+    &:hover{
+        box-shadow: 0 0 10px rgb(9, 5, 3) inset;
+        transition: box-shadow 0.3s;
+    }
+    h3{
+        &:hover{
+            color: red;
+        }
+    }
+    
+}

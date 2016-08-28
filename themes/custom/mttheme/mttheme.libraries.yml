@@ -13,3 +13,4 @@ fonts:
     css:
         theme:
             '//fonts.googleapis.com/css?family=Fjalla+One': {type: external}
+            '//fonts.googleapis.com/css?family=Permanent+Marker': {type: external}

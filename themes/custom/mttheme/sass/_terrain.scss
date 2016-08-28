@@ -1,15 +1,20 @@
 
 .terrain{
-    margin-bottom: 100px;
+    
     h3{
-        font-size: 600%;
+        font-size: 300%;
         font-weight: bold;
     }
 }
 .info-terrain{
-    background: #AFAFAF;
+    background: url('../images/bg-text.png');
+    box-shadow: 0 0 10px rgb(9, 5, 3) inset;
     padding: 50px;
 }
 #info_agence_terrain{
     text-align: center;
+}
+
+h3, h4{
+    font-family: 'Fjalla One', sans-serif;
 }

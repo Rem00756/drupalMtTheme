@@ -1,19 +1,13 @@
 .main-header{
-    height:300px;
-    background:url(../images/amggtr.JPG) no-repeat center center;
+    height:100px;
+    background: #464646;
+    border-bottom: 1px solid #000;
+
 }
 
-.logo{
-    @include span(2);
-    
-    img{
-        max-width:100%;
-    }
-}
 
 .main-navigation{
-    margin-top:25px;
-    @include span(5 last);
+    padding-top: 31px;
     
     li{
         float: left;
@@ -28,5 +22,13 @@
         &:hover{
             text-decoration: underline;
         }
+    }
+    h3{
+        font-family: 'Permanent Marker', cursive;
+        color: #FF4500;
+        margin-top: -16px;
+        font-size: 300%;
+        padding: 0;
+        margin-left: -40px;
     }
 }

@@ -1,0 +1,17 @@
+.label-form{
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 200%;
+    font-weight: bolder;
+}
+.form-partie{
+    margin-bottom: 50px;
+    .form-wrapper{
+        display: none;
+    }
+    .description{
+        display: none;
+    }
+}
+.fieldset-legend{
+    display: none;
+}

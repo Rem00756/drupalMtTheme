@@ -1,37 +1,41 @@
 <!-- content.fiel_afficha[].getValue()|first.value --> 
 <div class="large-12">
-    <div class="terrain titre large-12">
+
+    <div class="terrain titre large-centered">
         <h3>{{content.field_titre_annonce}}</h3>
+        <p>{{content.field_adresse_t}}</p>
     </div>
-    <div class="terrain maps">
-        {{content.field_geolocalisation}}
-    </div>
-    {% if content.field_afficha == true %}
-        <div class="terrain photo_terrain col-lg-offset-4 col-lg-4">
-            {{content.field_photo_terrain}}
-        </div>
-    {% endif %}
     <div class="row info-terrain">
-            
-            <div class="row">
-                <div class="terrain description large-6 columns">
-                    <h4>Description</h4>
-                    {{content.field_description}}
-                </div>
-                <div class="terrain prix large-6 columns">
-                    <h4>Prix</h4>
-                    {{content.field_prix}}
-                </div>
-                
+        <div class="row">
+            <div class="terrain description large-6 columns">
+                <h4>Description</h4>
+                {{content.field_description}}
             </div>
-            
-            <div class="row">
-                <div id="info_agence_terrain" class="terrain agence small-6 large-centered columns">
-                    <h4>Agence Immobilière</h4>
-                    {{content.field_agence}}
-                </div>
+            <div class="terrain prix large-6 columns">
+                <h4>Prix</h4>
+                <p>{{content.field_prix}}€</p>
+                <h4>Superficie</h4>
+                <p>{{content.field_super}} m²</p>
             </div>
-                
+        </div>
+        <div class="row ">
+            <div class="terrain maps large-6 columns">
+                {{content.field_geolocalisation}}
+            </div>
+            {% if content.field_afficha == true %}
+                <div class="terrain photo_terrain large-6 columns">
+                    {{content.field_photo_terrain}}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <div id="info_agence_terrain" class="terrain agence large-centered">
+                <h4>Agence Immobilière</h4>
+                {{content.field_agence}}
+            </div>
+        </div>
+
 
     </div>
 </div>
