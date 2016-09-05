@@ -1,0 +1,16 @@
+.slidershow{
+    h2{
+        font-family: 'Fjalla One', sans-serif;
+        text-align: center;
+        font-size: 300%;
+    }
+    a{
+        font-family: 'Fjalla One', sans-serif;
+        color: #000;
+        font-weight: bolder;
+        font-size: 200%;
+        &:hover{
+            color: red;
+        }
+    }
+}
