@@ -94,9 +94,9 @@ class ContentEntity extends DatasourcePluginBase implements EntityDatasourceInte
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, array $plugin_definition) {
-    if (!empty($configuration['index']) && $configuration['index'] instanceof IndexInterface) {
-      $this->setIndex($configuration['index']);
-      unset($configuration['index']);
+    if (!empty($configuration['#index']) && $configuration['#index'] instanceof IndexInterface) {
+      $this->setIndex($configuration['#index']);
+      unset($configuration['#index']);
     }
 
     // Since defaultConfiguration() depends on the plugin definition, we need to
@@ -738,9 +738,9 @@ class ContentEntity extends DatasourcePluginBase implements EntityDatasourceInte
 
     $configuration = $this->getConfiguration();
 
-    // If "default" is TRUE (i.e., "All except those selected"), remove all the
-    // selected bundles from the available ones to compute the indexed bundles.
-    // Otherwise, return all the selected bundles.
+    // If "default" is TRUE (that is, "All except those selected"),remove all
+    // the selected bundles from the available ones to compute the indexed
+    // bundles. Otherwise, return all the selected bundles.
     $bundles = array();
     $entity_bundles = $this->getEntityBundles();
     $selected_bundles = array_flip($configuration['bundles']['selected']);

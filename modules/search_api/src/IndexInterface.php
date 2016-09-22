@@ -489,6 +489,21 @@ interface IndexInterface extends ConfigEntityInterface {
   public function removeField($field_id);
 
   /**
+   * Sets this index's fields.
+   *
+   * Usually, it's a better idea to add/rename/remove fields individually with
+   * the above methods. Use this method only if this is for some reason not
+   * easily possible (such as when renaming multiple fields at once might cause
+   * conflicts).
+   *
+   * @param \Drupal\search_api\Item\FieldInterface[] $fields
+   *   An array of fields for this index, keyed by field IDs.
+   *
+   * @return $this
+   */
+  public function setFields(array $fields);
+
+  /**
    * Returns a list of all indexed fields of this index.
    *
    * @param bool $include_server_defined
@@ -534,6 +549,14 @@ interface IndexInterface extends ConfigEntityInterface {
    *   available for this index.
    */
   public function getFulltextFields();
+
+  /**
+   * Retrieves all field IDs that changed compared to the index's saved version.
+   *
+   * @return string[]
+   *   An associative array mapping old field IDs to the new ones.
+   */
+  public function getFieldRenames();
 
   /**
    * Retrieves the properties of one of this index's datasources.
@@ -596,9 +619,9 @@ interface IndexInterface extends ConfigEntityInterface {
   /**
    * Indexes some objects on this index.
    *
-   * Will return the IDs of items that were marked as indexed – i.e., items that
-   * were either rejected from indexing (by a processor or alter hook) or were
-   * successfully indexed.
+   * Will return the IDs of items that were marked as indexed – that is, items
+   * that were either rejected from indexing (by a processor or alter hook) or
+   * were successfully indexed.
    *
    * @param \Drupal\Core\TypedData\ComplexDataInterface[] $search_objects
    *   An array of search objects to be indexed, keyed by their item IDs.
@@ -693,8 +716,8 @@ interface IndexInterface extends ConfigEntityInterface {
    * Marks all items in this index for reindexing.
    *
    * @throws \Drupal\search_api\SearchApiException
-   *   Thrown if an internal error prevented the operation from succeeding.
-   *   E.g., if the tracker couldn't be loaded.
+   *   Thrown if an internal error prevented the operation from succeeding – for
+   *   example, if the tracker couldn't be loaded.
    */
   public function reindex();
 

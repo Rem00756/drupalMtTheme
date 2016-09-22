@@ -307,7 +307,7 @@ class IndexChangesTest extends KernelTestBase {
     $processor = $this->container
       ->get('plugin.manager.search_api.processor')
       ->createInstance('add_url', array(
-        'index' => $this->index,
+        '#index' => $this->index,
       ));
     $this->index->addProcessor($processor);
 
@@ -370,7 +370,7 @@ class IndexChangesTest extends KernelTestBase {
     $datasource = $this->container
       ->get('plugin.manager.search_api.datasource')
       ->createInstance($datasource_id, array(
-        'index' => $this->index,
+        '#index' => $this->index,
         'bundles' => array(
           'default' => TRUE,
           'selected' => array(),
@@ -405,6 +405,29 @@ class IndexChangesTest extends KernelTestBase {
 
     $fields = array_keys($this->index->getFields());
     $this->assertEquals(array('field1'), $fields);
+  }
+
+  /**
+   * Tests correct behavior when a field ID is changed.
+   */
+  public function testFieldRenamed() {
+    $datasource_id = 'entity:entity_test_mulrev_changed';
+    $info = array(
+      'datasource_id' => $datasource_id,
+      'property_path' => 'name',
+    );
+    $field = Utility::createField($this->index, 'name', $info);
+    $this->index->addField($field);
+    $this->assertEquals(array(), $this->index->getFieldRenames());
+
+    $this->index->renameField('name', 'name1');
+    $this->assertEquals(array('name1' => $field), $this->index->getFields());
+    $this->assertEquals(array('name' => 'name1'), $this->index->getFieldRenames());
+
+    // Saving resets the field IDs.
+    $this->index->save();
+    $this->assertEquals(array(), $this->index->getFieldRenames());
+    $this->assertEquals('name1', $this->index->getField('name1')->getOriginalFieldIdentifier());
   }
 
   /**

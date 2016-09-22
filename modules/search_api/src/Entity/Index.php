@@ -332,7 +332,7 @@ class Index extends ConfigEntityBase implements IndexInterface {
       /** @var \Drupal\Component\Plugin\PluginManagerInterface $plugin_manager */
       $plugin_manager = \Drupal::getContainer()
         ->get("plugin.manager.search_api.$type");
-      $configuration['index'] = $this;
+      $configuration['#index'] = $this;
       return $plugin_manager->createInstance($plugin_id, $configuration);
     }
     catch (ServiceNotFoundException $e) {
@@ -719,6 +719,7 @@ class Index extends ConfigEntityBase implements IndexInterface {
 
     $this->fieldInstances[$new_field_id] = $this->fieldInstances[$old_field_id];
     unset($this->fieldInstances[$old_field_id]);
+    $this->fieldInstances[$new_field_id]->setFieldIdentifier($new_field_id);
 
     return $this;
   }
@@ -738,6 +739,13 @@ class Index extends ConfigEntityBase implements IndexInterface {
     unset($this->fieldInstances[$field_id]);
 
     return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setFields(array $fields) {
+    $this->fieldInstances = $fields;
   }
 
   /**
@@ -790,6 +798,19 @@ class Index extends ConfigEntityBase implements IndexInterface {
       }
     }
     return $fulltext_fields;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFieldRenames() {
+    $renames = array();
+    foreach ($this->getFields() as $field_id => $field) {
+      if ($field->getOriginalFieldIdentifier() != $field_id) {
+        $renames[$field->getOriginalFieldIdentifier()] = $field_id;
+      }
+    }
+    return $renames;
   }
 
   /**
@@ -857,8 +878,8 @@ class Index extends ConfigEntityBase implements IndexInterface {
     // Check whether there are requested items that couldn't be loaded.
     $items_by_datasource = array_filter($items_by_datasource);
     if ($items_by_datasource) {
-      // Extract the second-level values of the two-dimensional array (i.e., the
-      // combined item IDs) and log a warning reporting their absence.
+      // Extract the second-level values of the two-dimensional array (that is,
+      // the combined item IDs) and log a warning reporting their absence.
       $missing_ids = array_reduce(array_map('array_values', $items_by_datasource), 'array_merge', array());
       $args['%index'] = $this->label();
       $args['@items'] = '"' . implode('", "', $missing_ids) . '"';
@@ -1270,6 +1291,9 @@ class Index extends ConfigEntityBase implements IndexInterface {
     catch (SearchApiException $e) {
       watchdog_exception('search_api', $e);
     }
+
+    // Reset the field instances so saved renames won't be reported anymore.
+    $this->fieldInstances = NULL;
   }
 
   /**

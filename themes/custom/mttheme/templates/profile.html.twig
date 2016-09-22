@@ -3,31 +3,41 @@
     <div id="agence" class="nom_agence">
         <h3>{{content.field_nom_de_l_agence}}<h3>
     </div>
-    <div id="agence" class="photo_agence">
-        {{content.field_photo_agence}}
+    <div class="row">
+        <div id="agence" class="large-6 columns photo_agence">
+            {{content.field_photo_agence}}
+        </div>
+        <div id="agence" class="large-6 columns renseignement_agence">
+            <h4>Contact</h4>
+            <div><i class="fi-mail"></i>{{content.field_email_agence}}</div>
+            <div><i class="fi-laptop"></i>{{content.field_site_internet}}</div>
+            <div><i class="fi-telephone"></i>{{content.field_numero_telephone_de_l_agen}}</div>
+        </div>
     </div>
-    <div id="agence" class="adresse_agence">
-        <h4>Adresse de l'agence "{{content.field_nom_de_l_agence}}"</h4>
-        <p>
-            {{content.field_adre}}
-        </p>
+    <div class="row">
+        <div id="agence" class=" googlemap_agence">
+            {{content.field_google_map}}
+        </div>
     </div>
-    <div id="agence" class="googlemap_agence">
-        {{content.field_google_map}}
-    </div>
-    <div id="agence" class="renseignement_agence">
-        <h4>Contact</h4>
-        <div><i class="fi-mail"></i>{{content.field_email_agence}}</div>
-        <div><i class="fi-laptop"></i>{{content.field_site_internet}}</div>
-        <div><i class="fi-telephone"></i>{{content.field_numero_telephone_de_l_agen}}</div>
-    </div>
-    <div id="agence" class="description_agence">
-        <h4>Description</h4>
-        {{content.field_description_agence}}
-    </div>
-    <div id="agence" class="horaire_agence">
-        <h4>Notre horaire</h4>
-        {{content.field_horaire}}
+    <div class="row">
+        <div id="agence" class="large-4 columns adresse_agence">
+            <h4>Adresse de l'agence</h4>
+            <p>
+                {{content.field_adre}}
+            </p>
+        </div>
+        <div id="agence" class="large-4 columns horaire_agence">
+            <h4>Notre horaire</h4>
+            {{content.field_horaire}}
+        </div>
+        <div id="agence" class="large-4 columns description_agence">
+            <h4>Description</h4>
+            {{content.field_description_agence}}
+        </div>
+    </div> 
+    
+    
+    <div id="agence" class="nos_annonces">
+        <h4>Nos annonces</h4>
     </div>
 </div>
-

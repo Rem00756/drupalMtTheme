@@ -20,8 +20,9 @@ use Symfony\Component\Yaml\Parser;
  * @SearchApiProcessor(
  *   id = "html_filter",
  *   label = @Translation("HTML filter"),
- *   description = @Translation("Strips HTML tags from fulltext fields and decodes HTML entities. Use this processor when indexing HTML data, e.g., node bodies for certain text formats. The processor also allows to boost (or ignore) the contents of specific elements."),
+ *   description = @Translation("Strips HTML tags from fulltext fields and decodes HTML entities. Use this processor when indexing HTML data – for example, node bodies for certain text formats. The processor also allows to boost (or ignore) the contents of specific elements."),
  *   stages = {
+ *     "pre_index_save" = 0,
  *     "preprocess_index" = -10,
  *     "preprocess_query" = -10
  *   }

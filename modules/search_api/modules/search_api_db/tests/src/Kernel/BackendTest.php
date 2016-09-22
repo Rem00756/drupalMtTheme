@@ -67,6 +67,8 @@ class BackendTest extends BackendTestBase {
     $this->editServerMinChars();
     $this->searchSuccessMinChars();
     $this->checkUnknownOperator();
+    $this->checkDbQueryAlter();
+    $this->checkFieldIdChanges();
   }
 
   /**
@@ -368,6 +370,29 @@ class BackendTest extends BackendTestBase {
     catch (SearchApiException $e) {
       $this->assertTrue(TRUE, 'Unknown operator "!=" threw an exception.');
     }
+  }
+
+  /**
+   * Checks whether the module's specific alter hooks work correctly.
+   */
+  protected function checkDbQueryAlter() {
+    $query = $this->buildSearch();
+    $query->setOption('search_api_test_db_search_api_db_query_alter', TRUE);
+    $results = $query->execute();
+    $this->assertResults(array(), $results, 'Query triggering custom alter hook');
+  }
+
+  /**
+   * Checks that field ID changes are treated correctly (without re-indexing).
+   */
+  protected function checkFieldIdChanges() {
+    $this->getIndex()
+      ->renameField('type', 'foobar')
+      ->save();
+
+    $results = $this->buildSearch(NULL, array('foobar,item'))->execute();
+    $this->assertResults(array(1, 2, 3), $results, 'Search after renaming a field.');
+    $this->getIndex()->renameField('foobar', 'type')->save();
   }
 
   /**

@@ -106,7 +106,7 @@ class QueryTest extends KernelTestBase {
   public function testProcessingLevel($level, $hooks_and_processors_invoked = TRUE) {
     /** @var \Drupal\search_api\Processor\ProcessorInterface $processor */
     $processor = $this->container->get('plugin.manager.search_api.processor')
-      ->createInstance('search_api_test', array('index' => $this->index));
+      ->createInstance('search_api_test', array('#index' => $this->index));
     $this->index->addProcessor($processor)->save();
 
     $query = $this->index->query();
@@ -190,6 +190,48 @@ class QueryTest extends KernelTestBase {
     $cloned_query = clone $query;
     $unserialized_query = unserialize(serialize($query));
     $this->assertEquals($cloned_query, $unserialized_query);
+  }
+
+  /**
+   *
+   * Tests that the results cache works correctly.
+   */
+  public function testResultsCache() {
+    /** @var \Drupal\search_api\Query\QueryInterface[] $results */
+    $results = array();
+    $search_ids = array('foo', 'bar');
+    foreach ($search_ids as $search_id) {
+      $results[$search_id] = $this->index->query()
+        ->setSearchId($search_id)
+        ->execute();
+    }
+
+    $results_cache = \Drupal::getContainer()
+      ->get('search_api.query_helper');
+    foreach ($search_ids as $search_id) {
+      $this->assertSame($results[$search_id], $results_cache->getResults($search_id));
+    }
+    $this->assertNull($results_cache->getResults('foobar'));
+
+    $this->assertSame($results, $results_cache->getAllResults());
+
+    $results_cache->removeResults('foo');
+    unset($results['foo']);
+    $this->assertSame($results, $results_cache->getAllResults());
+  }
+
+  /**
+   * Tests whether the display plugin integration works correctly.
+   */
+  public function testDisplayPluginIntegration() {
+    $query = $this->index->query();
+    $this->assertSame(NULL, $query->getSearchId(FALSE));
+    $this->assertSame('search_1', $query->getSearchId());
+    $this->assertSame('search_1', $query->getSearchId(FALSE));
+    $this->assertSame(NULL, $query->getDisplayPlugin());
+
+    $query = $this->index->query()->setSearchId('search_api_test');
+    $this->assertInstanceOf('Drupal\search_api_test\Plugin\search_api\display\TestDisplay', $query->getDisplayPlugin());
   }
 
 }
